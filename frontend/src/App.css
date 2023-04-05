@@ -1,38 +1,91 @@
-.App {
+* {
+  /* border: 1px solid red; */
+}
+
+body {
+  background-color: #F6F5F5;
+}
+
+input {
+  border: 1px solid grey;
+}
+
+button {
+  border: 1px solid grey;
+}
+
+.constrain {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  min-width: 320px;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.login-form fieldset {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin-top: 88px;
+}
+
+.login-form fieldset label {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 12px; /* Set equal to .loginform fieldset input padding */
+  text-transform: uppercase;
+}
+
+.login-form fieldset input {
+  border-radius: 12px;
+  height: 34px;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 5px 12px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.login-form fieldset button {
+  height: 48px;
+  border-radius: 12px;
+  width: 90%;
+  margin: 0 auto 12px; /* Left/right margin auto -> centered button */
+  font-size: 22px;
+  background-color: #E1E1E1;
+}
+
+.login-form fieldset .tos {
+  font-size: 12px;
+  margin: 0 auto;
+}
+
+.login-form fieldset span {
+  display: flex;
+}
+
+
+
+/*  CUSTOM HORIZONTAL RULE SEPARATOR  */
+.separator {
+  margin: 24px 0 24px;
+  display: flex;
+  align-items: center;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.separator::before,
+.separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid grey;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.separator:not(:empty)::before {
+  margin-right: .25em;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.separator:not(:empty)::after {
+  margin-left: .25em;
 }

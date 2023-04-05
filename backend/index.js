@@ -1,26 +1,33 @@
 // IMPORTS
-
-const cors = require("cors"); // Cross-origin resource sharing
-
 const express = require("express");
+const app = express();
+
+const cors = require("cors"); // Allow CORS on all requests
+app.use(cors()) 
+
+const dotenv = require('dotenv') // Local environment variables in .env
+dotenv.config() // Env variables available as process.env.NAME
+
+const morgan = require('morgan') // Log HTTP requests
+app.use(morgan('dev')) 
+
 const { createServer } = require("http");
 const { Server } = require("socket.io");
-
-const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
-  /* options */
+  // Manual CORS config req'd for dev with front/backend at localhost:3000/3001
   cors: {
     origin: "http://localhost:3000",
   },
 });
 
-// MIDDLEWARE
-app.use(express.json());
-app.use(cors());
 
-// Middleware to prefer returning resources in /build directory (frontend)
-app.use(express.static("build"));
+// MIDDLEWARE
+app.use(express.json()); // Attach request json content to request.body
+
+
+app.use(express.static("build")); // Return frontend resources in ./build
+
 
 // ROUTES
 let answers = [
@@ -65,7 +72,7 @@ io.on("connection", (socket) => {
   app.get("/", (request, response) => {
     response.json(answers);
   });
-
+require('dotenv').config()
   app.get("/api/submissions", (request, response) => {
     console.debug(`GET request for ${JSON.stringify(answers)}`);
     response.json(answers);
