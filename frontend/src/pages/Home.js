@@ -16,7 +16,7 @@ function Home({ handleJoinRoom, handleCreateRoom }) {
       console.debug(`No username specified!`);
       return;
     }
-    
+
     const joinObject = {
       roomcode: roomcode,
       username: username,
@@ -25,7 +25,15 @@ function Home({ handleJoinRoom, handleCreateRoom }) {
   }
 
   function _handleRoomcodeChange(event) {
-    setRoomcode(event.target.value);
+    const allowed = /^[A-Za-z]+$/; // REGEX for letters A-Z
+    const text = event.target.value;
+
+    if (text.match(allowed)) {
+      setRoomcode(event.target.value);
+      return;
+    }
+
+    event.target.value = text.slice(0, -1);
   }
 
   function _handleUsernameChange(event) {
@@ -50,7 +58,9 @@ function Home({ handleJoinRoom, handleCreateRoom }) {
             ></input>
             <label htmlFor="username">
               NAME
-              <span className="remaining">{!username ? "12" : maxNameLength - username.length}</span>
+              <span className="remaining">
+                {!username ? "12" : maxNameLength - username.length}
+              </span>
             </label>
             <input
               name="username"
