@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 function Home({ handleJoinRoom, handleCreateRoom }) {
   const [roomcode, setRoomcode] = useState(undefined);
   const [username, setUsername] = useState(undefined);
+  const maxNameLength = 12;
 
   function _handleJoinRoom(event) {
     event.preventDefault();
@@ -44,16 +45,17 @@ function Home({ handleJoinRoom, handleCreateRoom }) {
             <input
               name="code"
               placeholder="Enter 4-letter code"
+              maxLength="4"
               onChange={(event) => _handleRoomcodeChange(event)}
             ></input>
             <label htmlFor="username">
               NAME
-              <span className="remaining">12</span>
+              <span className="remaining">{!username ? "12" : maxNameLength - username.length}</span>
             </label>
             <input
               name="username"
               placeholder="Enter your name"
-              maxLength="12"
+              maxLength={maxNameLength.toString()}
               onChange={(event) => _handleUsernameChange(event)}
             ></input>
             <button className="button-play">PLAY</button>
