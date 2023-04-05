@@ -46,6 +46,7 @@ function Home({ handleJoinRoom, handleCreateRoom }) {
         <form
           className="login-form"
           autoComplete="off"
+          spellCheck="off"
           onSubmit={(event) => _handleJoinRoom(event)}
         >
           <fieldset>
